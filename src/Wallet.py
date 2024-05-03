@@ -53,3 +53,13 @@ class Wallet:
         """
         self.records.append(record)
         self.save_records()
+
+    def get_balance(self, _category: str) -> float:
+        category = Record.parse_category(_category)
+
+        # Расход/доход подразумевает положительное число, на всякий используем abs. Пользователь есть пользователь :)
+        total = abs(
+            sum(record.amount for record in self.records if record.category == category)
+        )
+
+        return round(total, 2)

@@ -14,13 +14,25 @@ def main():
     print(wallet)
 
     while True:
-        print("1. Добавление записи")
+        print("\n1. Вывести баланс")
+        print("2. Добавление записи")
         print("0. Выход")
 
-        choice = input("Выберите действие: ")
+        choice = input("\nВыберите действие: ")
 
         match choice.strip():
             case "1":
+                income = wallet.get_balance("Доход")
+                expenses = wallet.get_balance("Расход")
+                difference = round(income - expenses, 2)
+                # Добавляем "+" для положительного баланса для читаемости
+                prefix = "+" if difference > 0 else ""
+
+                print(f"Суммарный доход: {"{:.2f}".format(income)}")
+                print(f"Всего потрачено: {"{:.2f}".format(expenses)}")
+                print(f"Разница: {prefix}{"{:.2f}".format(difference)}")
+
+            case "2":
                 date = input(
                     "Введите дату (yyyy-mm-dd или yyyy.mm.dd). Пропуск для текущей даты: "
                 )
