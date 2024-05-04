@@ -19,11 +19,11 @@ class Wallet:
     def __str__(self):
         return f"Файл БД: {self.get_db_file()}\nЗаписей: {len(self.records)}"
 
-    def get_db_file(self):
+    def get_db_file(self) -> str:
         """
         Возвращает полный путь до файла БД
         """
-        return BASE_DIR / (self.filename + ".json")
+        return str(BASE_DIR / (self.filename + ".json"))
 
     def load_data(self):
         """
