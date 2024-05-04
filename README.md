@@ -29,4 +29,4 @@ python3 main.py
 
 База данных хранится в формате `json`.  
 Название самой БД конфигурируется в `settings.py`, или передаётся
-в аргументы `Wallet(filename=...)`. `filename` по умолчанию - db.json.
+в аргументы `Wallet(filename=...)`. `filename` по умолчанию - db.

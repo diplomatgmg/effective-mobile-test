@@ -7,7 +7,7 @@ def main():
     Инициализирует изначальный кошелек пользователя.
     Файл с БД хранится в той же директории, что и settings.py
     Файл с БД от кошелька передаётся в аргументы Wallet(filename=...)
-    filename по умолчанию - db.json.
+    filename по умолчанию - db.
     """
     wallet = Wallet()
     wallet.load_data()
