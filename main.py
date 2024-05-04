@@ -1,5 +1,6 @@
 from src.Wallet import Wallet
-from src.Record import Record
+
+from src.utils import validate_selected_record, print_records, create_record
 
 
 def main():
@@ -16,6 +17,7 @@ def main():
     while True:
         print("\n1. Вывести баланс")
         print("2. Добавление записи")
+        print("3. Редактирование записи")
         print("0. Выход")
 
         choice = input("\nВыберите действие: ")
@@ -33,16 +35,35 @@ def main():
                 print(f"Разница: {prefix}{"{:.2f}".format(difference)}")
 
             case "2":
-                date = input(
-                    "Введите дату (yyyy-mm-dd или yyyy.mm.dd). Пропуск для текущей даты: "
-                )
-                category = input("Введите категорию - Доход/Расход, д/р: ")
-                amount = input("Введите сумму: ")
-                description = input("Введите описание: ")
-
-                record = Record(date, category, amount, description)
+                record = create_record()
                 wallet.add_record(record)
                 print(wallet)
+            case "3":
+                records = [record.to_dict() for record in wallet.records]
+
+                if len(records) == 0:
+                    print("У вас нет записей. Изменять нечего.")
+                    continue
+
+                print_records(records)
+
+                while True:
+                    user_choice = input("Выберите номер нужной записи. Выход - 0: ")
+
+                    if user_choice.strip() == "0":
+                        break
+
+                    record_index, is_error = validate_selected_record(
+                        user_choice, max_index=len(records) - 1
+                    )
+
+                    if is_error:
+                        continue
+
+                    record = create_record()
+                    wallet.edit_record(record_index, record)
+                    break
+
             case "0":
                 print("\nВсе данные сохранены. Выход")
                 break

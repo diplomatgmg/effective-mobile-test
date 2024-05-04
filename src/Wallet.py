@@ -54,6 +54,13 @@ class Wallet:
         self.records.append(record)
         self.save_records()
 
+    def edit_record(self, index, record):
+        """
+        Изменяет запись о платеже по индексу
+        """
+        self.records[index] = record
+        self.save_records()
+
     def get_balance(self, _category: str) -> float:
         category = Record.parse_category(_category)
 
