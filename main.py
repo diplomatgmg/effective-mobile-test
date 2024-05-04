@@ -18,6 +18,7 @@ def main():
         print("\n1. Вывести баланс")
         print("2. Добавление записи")
         print("3. Редактирование записи")
+        print("4. Поиск записей")
         print("0. Выход")
 
         choice = input("\nВыберите действие: ")
@@ -38,6 +39,7 @@ def main():
                 record = create_record()
                 wallet.add_record(record)
                 print(wallet)
+
             case "3":
                 records = [record.to_dict() for record in wallet.records]
 
@@ -63,6 +65,17 @@ def main():
                     record = create_record()
                     wallet.edit_record(record_index, record)
                     break
+
+            case "4":
+                query = input("Введите текст для поиска: ").strip()
+                results = wallet.search_records(query)
+
+                if results:
+                    results_data = [record.to_dict() for record in results]
+                    print("Найденные записи:")
+                    print_records(results_data)
+                else:
+                    print("Ничего не найдено.")
 
             case "0":
                 print("\nВсе данные сохранены. Выход")

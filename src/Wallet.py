@@ -70,3 +70,12 @@ class Wallet:
         )
 
         return round(total, 2)
+
+    def search_records(self, query: str) -> list[Record]:
+        return [
+            record
+            for record in self.records
+            if query in record.description
+            or query in record.category
+            or query in str(record.amount)
+        ]
